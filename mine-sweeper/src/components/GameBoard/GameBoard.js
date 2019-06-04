@@ -48,7 +48,14 @@ class GameBoard extends Component {
       for ( let i = 0; i < rows; i++ ) {
          board.push( [] );
          for ( let j = 0; j < columns; j++ ) {
-            board[i].push( { type: 'normal', number: -1, isOpen: false } );
+            board[i].push( {
+               type: 'normal',
+               number: -1,
+               isOpen: false,
+               isFlagged: false,
+               row: i,
+               column: j,
+            } );
          }
       }
       for ( let i = 0; i < bombs; i++ ) {
