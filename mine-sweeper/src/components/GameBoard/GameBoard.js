@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Cell from 'components/Cell/Cell';
 
-const GRID_SIZE = '30px';
+const GRID_SIZE = '50px';
 const createGridStyle = ( amount ) => {
    let gridStyle = '';
    for ( let i = 0; i < amount; i++ ) {
@@ -15,6 +15,8 @@ const createGridStyle = ( amount ) => {
 
 const Board = styled.div`
    display: grid;
+   grid-gap: 1px;
+   background-color: #222;
    grid-template-columns: ${( { columns } ) => createGridStyle( columns )};
    grid-template-rows: ${( { rows } ) => createGridStyle( rows )};
 `;
