@@ -72,7 +72,7 @@ const Cell = ( { cellData, click } ) => {
                <CellImg src={ bombIcon } />
             ) : (
                <EmptyCell style={ { color: cellColor } }>
-                  {number != 0 && number}
+                  {number !== 0 && number}
                </EmptyCell>
             )
          ) : (
