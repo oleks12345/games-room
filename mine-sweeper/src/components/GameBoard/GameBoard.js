@@ -36,7 +36,13 @@ class GameBoard extends Component {
 
       for ( let i = 0; i < rows; i++ ) {
          for ( let j = 0; j < columns; j++ ) {
-            cells.push( <Cell cellData={ board[i][j] } /> );
+            cells.push(
+               <Cell
+                  key={ 'r' + i + 'c' + j }
+                  click={ this.handleCellClick }
+                  cellData={ board[i][j] }
+               />
+            );
          }
       }
       return cells;
