@@ -58,10 +58,15 @@ class GameBoard extends Component {
             board[row][column].type = 'bomb';
          } else i--;
       }
+      return board;
    };
 
    startGame = () => {
-      this.generateBoard();
+      const board = this.generateBoard();
+      this.setState( {
+         board,
+         started: true,
+      } );
    };
    render() {
       const { rows, columns, started } = this.state;
