@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
+import Cell from 'components/Cell/Cell';
 
 const GRID_SIZE = '30px';
 const createGridStyle = ( amount ) => {
@@ -20,25 +21,35 @@ const Board = styled.div`
 
 class GameBoard extends Component {
    state = {
-      rows: 8,
-      columns: 8,
+      rows: 16,
+      columns: 16,
+      // board: [],
+      started: false,
    };
+
    createGameCells = () => {
       const { rows, columns } = this.state;
       const cells = [];
       for ( let i = 0; i < rows; i++ ) {
          for ( let j = 0; j < columns; j++ ) {
-            cells.push( <div /> );
+            cells.push( <Cell /> );
          }
       }
       return cells;
    };
+
    render() {
-      const { rows, columns } = this.state;
+      const { rows, columns, started } = this.state;
       return (
-         <Board rows={ rows } columns={ columns }>
-            {this.createGameCells()}
-         </Board>
+         <>
+            {started ? (
+               <Board rows={ rows } columns={ columns }>
+                  {this.createGameCells()}
+               </Board>
+            ) : (
+               <button type="button">Start</button>
+            )}
+         </>
       );
    }
 }
