@@ -23,21 +23,44 @@ class GameBoard extends Component {
    state = {
       rows: 16,
       columns: 16,
-      // board: [],
+      bombs: 40,
+      board: [],
       started: false,
    };
 
    createGameCells = () => {
-      const { rows, columns } = this.state;
+      const { rows, columns, board } = this.state;
       const cells = [];
+
       for ( let i = 0; i < rows; i++ ) {
          for ( let j = 0; j < columns; j++ ) {
-            cells.push( <Cell /> );
+            cells.push( <Cell cellData={ board[i][j] } /> );
          }
       }
       return cells;
    };
+   generateBoard = () => {
+      const { rows, columns, bombs } = this.state;
 
+      const board = [];
+      for ( let i = 0; i < rows; i++ ) {
+         board.push( [] );
+         for ( let j = 0; j < columns; j++ ) {
+            board[i].push( { type: null, isOpen: false } );
+         }
+      }
+      for ( let i = 0; i < bombs; i++ ) {
+         const column = Math.floor( Math.random() * columns );
+         const row = Math.floor( Math.random() * rows );
+         if ( board[row][column].type === null ) {
+            board[row][column].type = 'bomb';
+         } else i--;
+      }
+   };
+
+   startGame = () => {
+      this.generateBoard();
+   };
    render() {
       const { rows, columns, started } = this.state;
       return (
@@ -47,7 +70,9 @@ class GameBoard extends Component {
                   {this.createGameCells()}
                </Board>
             ) : (
-               <button type="button">Start</button>
+               <button onClick={ this.startGame } type="button">
+                  Start
+               </button>
             )}
          </>
       );
