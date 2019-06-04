@@ -46,13 +46,13 @@ class GameBoard extends Component {
       for ( let i = 0; i < rows; i++ ) {
          board.push( [] );
          for ( let j = 0; j < columns; j++ ) {
-            board[i].push( { type: null, isOpen: false } );
+            board[i].push( { type: 'normal', number: -1, isOpen: false } );
          }
       }
       for ( let i = 0; i < bombs; i++ ) {
          const column = Math.floor( Math.random() * columns );
          const row = Math.floor( Math.random() * rows );
-         if ( board[row][column].type === null ) {
+         if ( board[row][column].type === 'normal' ) {
             board[row][column].type = 'bomb';
          } else i--;
       }
