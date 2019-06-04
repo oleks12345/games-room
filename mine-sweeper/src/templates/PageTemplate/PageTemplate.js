@@ -6,7 +6,7 @@ const PageTemplate = ( { children } ) => {
    return (
       <>
          <GlobalStyle />
-         {children}f
+         {children}
       </>
    );
 };
