@@ -71,7 +71,9 @@ const Cell = ( { cellData, click } ) => {
             type === 'bomb' ? (
                <CellImg src={ bombIcon } />
             ) : (
-               <EmptyCell style={ { color: cellColor } }>{number}</EmptyCell>
+               <EmptyCell style={ { color: cellColor } }>
+                  {number != 0 && number}
+               </EmptyCell>
             )
          ) : (
             <StyledCell
