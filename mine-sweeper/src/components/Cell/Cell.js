@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import bombIcon from 'assets/images/mine.png';
+import flagIcon from 'assets/images/flag.svg';
 
 const StyledCell = styled.button`
    border-width: 10px;
@@ -19,12 +20,14 @@ const EmptyCell = styled.div`
    background-color: #dddddd;
 `;
 const CellImg = styled.img`
+   background-color: #dddddd;
    width: 100%;
    height: 100%;
 `;
 
 const Cell = ( { cellData, click } ) => {
-   const { isOpen, type, row, column } = cellData;
+   const { isOpen, isFlagged, type, row, column } = cellData;
+
    return (
       <>
          {isOpen ? (
@@ -34,7 +37,17 @@ const Cell = ( { cellData, click } ) => {
                <EmptyCell />
             )
          ) : (
-            <StyledCell onClick={ () => click( row, column ) } />
+            <StyledCell
+               onContextMenu={ ( e ) => {
+                  e.preventDefault();
+                  click( 'right', row, column );
+               } }
+               onClick={ () => {
+                  click( 'left', row, column );
+               } }
+            >
+               {isFlagged && <CellImg src={ flagIcon } />}
+            </StyledCell>
          )}
       </>
    );
