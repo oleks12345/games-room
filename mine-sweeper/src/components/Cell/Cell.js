@@ -17,7 +17,16 @@ const StyledCell = styled.button`
    }
 `;
 const EmptyCell = styled.div`
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   font-family: arial;
+   font-weight: bold;
    background-color: #dddddd;
+   font-size: 50px;
 `;
 const CellImg = styled.img`
    background-color: #dddddd;
@@ -26,15 +35,43 @@ const CellImg = styled.img`
 `;
 
 const Cell = ( { cellData, click } ) => {
-   const { isOpen, isFlagged, type, row, column } = cellData;
-
+   const { isOpen, isFlagged, number, type, row, column } = cellData;
+   let cellColor = '';
+   switch ( number ) {
+   case 1:
+      cellColor = 'blue';
+      break;
+   case 2:
+      cellColor = 'green';
+      break;
+   case 3:
+      cellColor = 'red';
+      break;
+   case 4:
+      cellColor = 'purple';
+      break;
+   case 5:
+      cellColor = 'maroon';
+      break;
+   case 6:
+      cellColor = 'turquoise';
+      break;
+   case 7:
+      cellColor = 'black';
+      break;
+   case 8:
+      cellColor = 'grey';
+      break;
+   default:
+      break;
+   }
    return (
       <>
          {isOpen ? (
             type === 'bomb' ? (
                <CellImg src={ bombIcon } />
             ) : (
-               <EmptyCell />
+               <EmptyCell style={ { color: cellColor } }>{number}</EmptyCell>
             )
          ) : (
             <StyledCell
