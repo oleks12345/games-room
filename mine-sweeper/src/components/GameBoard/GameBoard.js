@@ -71,6 +71,27 @@ class GameBoard extends Component {
             board[row][column].type = 'bomb';
          } else i--;
       }
+      const directions = [ -1, 0, 1 ];
+      for ( let i = 0; i < rows; i++ ) {
+         for ( let j = 0; j < columns; j++ ) {
+            if ( board[i][j].type === 'bomb' ) continue;
+            let bombsCount = 0;
+            directions.forEach( ( directionY ) => {
+               directions.forEach( ( directionX ) => {
+                  if (
+                     i + directionY >= 0 &&
+                     i + directionY < rows &&
+                     j + directionX >= 0 &&
+                     j + directionX < columns
+                  ) {
+                     if ( board[i + directionY][j + directionX].type === 'bomb' )
+                        bombsCount++;
+                  }
+               } );
+            } );
+            board[i][j].number = bombsCount;
+         }
+      }
       return board;
    };
 
