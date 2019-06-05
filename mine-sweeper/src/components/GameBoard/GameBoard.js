@@ -51,15 +51,13 @@ class GameBoard extends Component {
 
    handleCellClick = ( type, row, column ) => {
       this.setState( ( prevState ) => {
-         const board = prevState.board;
+         const board = [ ...prevState.board ];
          const { rows, columns } = prevState;
          const cell = board[row][column];
          if ( type === 'left' && !cell.isFlagged ) {
             if ( cell.type === 'bomb' ) {
                cell.isOpen = true;
-               this.setState( {
-                  gameState: 'lost',
-               } );
+               this.lostGame();
             }
             if ( cell.type === 'normal' ) {
                cell.isOpen = true;
@@ -88,7 +86,10 @@ class GameBoard extends Component {
                            column >= 0 &&
                            column < columns
                         ) {
-                           if ( board[row][column] !== 'bomb' ) {
+                           if (
+                              board[row][column].type !== 'bomb' &&
+                              !board[row][column].isFlagged
+                           ) {
                               if (
                                  board[row][column].number === 0 &&
                                  board[row][column].isOpen === false
@@ -98,6 +99,7 @@ class GameBoard extends Component {
                            }
                         }
                      } );
+
                      queue.shift();
                   }
                }
