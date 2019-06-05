@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import bombIcon from 'assets/images/mine.png';
 import flagIcon from 'assets/images/flag.svg';
 
 const StyledCell = styled.button`
+   position: relative;
    border-width: 10px;
    border-top-color: white;
    border-left-color: white;
@@ -15,6 +16,20 @@ const StyledCell = styled.button`
       border-right-color: white;
       border-bottom-color: white;
    }
+   ${( { color } ) =>
+      color &&
+      css`
+         ::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            right: -10px;
+            top: -10px;
+            bottom: -10px;
+            background-color: ${color};
+            opacity: 0.5;
+         }
+      `}
 `;
 const EmptyCell = styled.div`
    width: 100%;
@@ -29,13 +44,13 @@ const EmptyCell = styled.div`
    font-size: 50px;
 `;
 const CellImg = styled.img`
-   background-color: #dddddd;
+   background-color: ${( { color } ) => ( color ? color : '#dddddd' )};
    width: 100%;
    height: 100%;
 `;
 
 const Cell = ( { cellData, click } ) => {
-   const { isOpen, isFlagged, number, type, row, column } = cellData;
+   const { isOpen, isFlagged, number, type, row, column, color } = cellData;
    let cellColor = '';
    switch ( number ) {
    case 1:
@@ -71,12 +86,13 @@ const Cell = ( { cellData, click } ) => {
             type === 'bomb' ? (
                <CellImg src={ bombIcon } />
             ) : (
-               <EmptyCell style={ { color: cellColor } }>
+               <EmptyCell color={ color } style={ { color: cellColor } }>
                   {number !== 0 && number}
                </EmptyCell>
             )
          ) : (
             <StyledCell
+               color={ color }
                onContextMenu={ ( e ) => {
                   e.preventDefault();
                   click( 'right', row, column );
