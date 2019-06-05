@@ -62,7 +62,16 @@ class GameBoard extends Component {
                if ( cell.number === 0 ) {
                   const queue = [ [ row, column ] ];
                   //there should be O(1) implementation of queue in JS...
-                  const directions = [ [ 0, -1 ], [ 0, 1 ], [ -1, 0 ], [ 1, 0 ] ];
+                  const directions = [
+                     [ 0, -1 ],
+                     [ 0, 1 ],
+                     [ -1, 0 ],
+                     [ 1, 0 ],
+                     [ -1, -1 ],
+                     [ -1, 1 ],
+                     [ 1, -1 ],
+                     [ 1, 1 ],
+                  ];
                   while ( queue.length ) {
                      const current = queue[0];
 
