@@ -84,7 +84,7 @@ class GameBoard extends Component {
                            column >= 0 &&
                            column < columns
                         ) {
-                           if ( board[row][column] != 'bomb' ) {
+                           if ( board[row][column] !== 'bomb' ) {
                               if (
                                  board[row][column].number === 0 &&
                                  board[row][column].isOpen === false
