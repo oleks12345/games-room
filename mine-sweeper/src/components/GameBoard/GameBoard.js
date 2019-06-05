@@ -33,6 +33,7 @@ class GameBoard extends Component {
       cellsLeft: 0,
       gameState: 'not started',
    };
+
    createGameCells = () => {
       const { rows, columns, board } = this.state;
       const cells = [];
@@ -123,6 +124,7 @@ class GameBoard extends Component {
          return { board, cellsLeft };
       } );
    };
+
    generateBoard = () => {
       const { rows, columns, bombs } = this.state;
 
@@ -170,15 +172,24 @@ class GameBoard extends Component {
       }
       return board;
    };
+
    handleGameStates = () => {
       const { gameState } = this.state;
-      return <GameStates gameState={ gameState } restart={ this.startGame } />;
+      return <GameStates gameState={ gameState } restart={ this.restartGame } />;
    };
+
+   restartGame = () => {
+      this.setState( {
+         gameState: 'not started',
+      } );
+   };
+
    wonGame = () => {
       this.setState( {
          gameState: 'won',
       } );
    };
+
    lostGame = () => {
       this.setState( ( prevState ) => {
          const board = [ ...prevState.board ];
@@ -195,6 +206,7 @@ class GameBoard extends Component {
          return { board: board, gameState: 'lost' };
       } );
    };
+
    startGame = () => {
       const board = this.generateBoard();
 
@@ -204,6 +216,7 @@ class GameBoard extends Component {
          cellsLeft: prevState.columns * prevState.rows,
       } ) );
    };
+
    render() {
       const { rows, columns, gameState } = this.state;
       return (
