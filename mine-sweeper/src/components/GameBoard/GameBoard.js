@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Cell from 'components/Cell/Cell';
 import GameStates from 'components/GameStates/GameStates';
+import StartMenu from '../StartMenu/StartMenu';
 
 const GRID_SIZE = '50px';
 const createGridStyle = ( amount ) => {
@@ -80,7 +81,7 @@ class GameBoard extends Component {
                   ];
                   while ( queue.length ) {
                      const current = queue[0];
-
+                     // eslint-disable-next-line no-loop-func
                      directions.forEach( ( direction ) => {
                         const row = current[0] + direction[0];
                         const column = current[1] + direction[1];
@@ -217,9 +218,7 @@ class GameBoard extends Component {
                   {this.handleGameStates()}
                </Board>
             ) : (
-               <button onClick={ this.startGame } type="button">
-                  Start
-               </button>
+               <StartMenu start={ this.startGame }>Start</StartMenu>
             )}
          </>
       );
