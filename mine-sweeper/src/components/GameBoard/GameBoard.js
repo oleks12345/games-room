@@ -47,6 +47,55 @@ class GameBoard extends Component {
       }
       return cells;
    };
+   handleCellClick = ( type, row, column ) => {
+      this.setState( ( prevState ) => {
+         const board = prevState.board;
+         const { rows, columns } = prevState;
+         const cell = board[row][column];
+         if ( type === 'left' && !cell.isFlagged ) {
+            if ( cell.type === 'bomb' ) {
+               cell.isOpen = true;
+               //lost
+            }
+            if ( cell.type === 'normal' ) {
+               cell.isOpen = true;
+               if ( cell.number === 0 ) {
+                  const queue = [ [ row, column ] ];
+                  //there should be O(1) implementation of queue in JS...
+                  const directions = [ [ 0, -1 ], [ 0, 1 ], [ -1, 0 ], [ 1, 0 ] ];
+                  while ( queue.length ) {
+                     const current = queue[0];
+
+                     directions.forEach( ( direction ) => {
+                        const row = current[0] + direction[0];
+                        const column = current[1] + direction[1];
+                        if (
+                           row >= 0 &&
+                           row < rows &&
+                           column >= 0 &&
+                           column < columns
+                        ) {
+                           if ( board[row][column] != 'bomb' ) {
+                              if (
+                                 board[row][column].number === 0 &&
+                                 board[row][column].isOpen === false
+                              )
+                                 queue.push( [ row, column ] );
+                              board[row][column].isOpen = true;
+                           }
+                        }
+                     } );
+                     queue.shift();
+                  }
+               }
+            }
+         }
+         if ( type === 'right' ) {
+            cell.isFlagged = !cell.isFlagged;
+         }
+         return { board };
+      } );
+   };
    generateBoard = () => {
       const { rows, columns, bombs } = this.state;
 
@@ -107,7 +156,11 @@ class GameBoard extends Component {
       return (
          <>
             {started ? (
-               <Board rows={ rows } columns={ columns }>
+               <Board
+                  rows={ rows }
+                  columns={ columns }
+                  onContextMenu={ ( e ) => e.preventDefault() }
+               >
                   {this.createGameCells()}
                </Board>
             ) : (
