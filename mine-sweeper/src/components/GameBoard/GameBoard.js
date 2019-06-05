@@ -57,6 +57,7 @@ class GameBoard extends Component {
          if ( type === 'left' && !cell.isFlagged ) {
             if ( cell.type === 'bomb' ) {
                cell.isOpen = true;
+               cell.color = 'red';
                this.lostGame();
             }
             if ( cell.type === 'normal' ) {
@@ -169,6 +170,8 @@ class GameBoard extends Component {
          for ( let i = 0; i < rows; i++ ) {
             for ( let j = 0; j < columns; j++ ) {
                if ( board[i][j].type === 'bomb' ) board[i][j].isOpen = true;
+               if ( board[i][j].isFlagged && board[i][j].type !== 'bomb' )
+                  board[i][j].color = 'red';
             }
          }
          return { board: board, gameState: 'lost' };
