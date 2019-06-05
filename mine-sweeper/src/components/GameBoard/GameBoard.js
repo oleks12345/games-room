@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Cell from 'components/Cell/Cell';
+import GameStates from 'components/GameStates/GameStates';
 
 const GRID_SIZE = '50px';
 const createGridStyle = ( amount ) => {
@@ -28,9 +29,8 @@ class GameBoard extends Component {
       columns: 16,
       bombs: 40,
       board: [],
-      started: false,
+      gameState: 'not started',
    };
-
    createGameCells = () => {
       const { rows, columns, board } = this.state;
       const cells = [];
@@ -48,6 +48,7 @@ class GameBoard extends Component {
       }
       return cells;
    };
+
    handleCellClick = ( type, row, column ) => {
       this.setState( ( prevState ) => {
          const board = prevState.board;
@@ -56,7 +57,9 @@ class GameBoard extends Component {
          if ( type === 'left' && !cell.isFlagged ) {
             if ( cell.type === 'bomb' ) {
                cell.isOpen = true;
-               //lost
+               this.setState( {
+                  gameState: 'lost',
+               } );
             }
             if ( cell.type === 'normal' ) {
                cell.isOpen = true;
@@ -153,25 +156,29 @@ class GameBoard extends Component {
       }
       return board;
    };
-
+   handleGameStates = () => {
+      const { gameState } = this.state;
+      return <GameStates gameState={ gameState } />;
+   };
    startGame = () => {
       const board = this.generateBoard();
       this.setState( {
          board,
-         started: true,
+         gameState: 'started',
       } );
    };
    render() {
-      const { rows, columns, started } = this.state;
+      const { rows, columns, gameState } = this.state;
       return (
          <>
-            {started ? (
+            {gameState !== 'not started' ? (
                <Board
                   rows={ rows }
                   columns={ columns }
                   onContextMenu={ ( e ) => e.preventDefault() }
                >
                   {this.createGameCells()}
+                  {this.handleGameStates()}
                </Board>
             ) : (
                <button onClick={ this.startGame } type="button">
