@@ -158,7 +158,19 @@ class GameBoard extends Component {
    };
    handleGameStates = () => {
       const { gameState } = this.state;
-      return <GameStates gameState={ gameState } />;
+      return <GameStates gameState={ gameState } restart={ this.startGame } />;
+   };
+   lostGame = () => {
+      this.setState( ( prevState ) => {
+         const board = [ ...prevState.board ];
+         const { rows, columns } = prevState;
+         for ( let i = 0; i < rows; i++ ) {
+            for ( let j = 0; j < columns; j++ ) {
+               if ( board[i][j].type === 'bomb' ) board[i][j].isOpen = true;
+            }
+         }
+         return { board: board, gameState: 'lost' };
+      } );
    };
    startGame = () => {
       const board = this.generateBoard();
