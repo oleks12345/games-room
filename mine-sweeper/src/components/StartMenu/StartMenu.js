@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
    padding: 40px;
 `;
 
-const StyledButton = styled.button`
+const StartButton = styled.button`
    position: relative;
    overflow: hidden;
    font-size: 50px;
@@ -58,9 +58,9 @@ const StartMenu = ( { start } ) => {
    return (
       <StyledWrapper>
          <StyledTitle>MineSweeper</StyledTitle>
-         <StyledButton onClick={ start }>
+         <StartButton onClick={ start }>
             <SpanTop>Start</SpanTop>
-         </StyledButton>
+         </StartButton>
       </StyledWrapper>
    );
 };
