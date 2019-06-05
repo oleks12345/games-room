@@ -14,6 +14,7 @@ const createGridStyle = ( amount ) => {
 };
 
 const Board = styled.div`
+   position: relative;
    display: grid;
    grid-gap: 1px;
    background-color: #222;
