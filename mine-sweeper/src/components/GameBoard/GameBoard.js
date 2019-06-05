@@ -170,6 +170,8 @@ class GameBoard extends Component {
          for ( let i = 0; i < rows; i++ ) {
             for ( let j = 0; j < columns; j++ ) {
                if ( board[i][j].type === 'bomb' ) board[i][j].isOpen = true;
+               if ( board[i][j].isFlagged && board[i][j].type === 'bomb' )
+                  board[i][j].color = 'green';
                if ( board[i][j].isFlagged && board[i][j].type !== 'bomb' )
                   board[i][j].color = 'red';
             }
