@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Lost from './Lost';
-import Won from './Won';
+import GameEnd from './GameEnd';
 
 const StyledWrapper = styled.div`
    position: absolute;
@@ -11,7 +10,6 @@ const StyledWrapper = styled.div`
    bottom: 0;
    left: 0;
    right: 0;
-   font-size: 100px;
    justify-content: center;
    align-items: center;
 `;
@@ -20,9 +18,13 @@ const GameStates = ( { gameState, restart } ) => {
    const handleGameStates = ( gameStates, restart ) => {
       switch ( gameStates ) {
       case 'lost':
-         return <Lost restart={ restart } />;
+         return (
+            <GameEnd title="You lost" titleColor="red" restart={ restart } />
+         );
       case 'won':
-         return <Won restart={ restart } />;
+         return (
+            <GameEnd title="You won" titleColor="lime" restart={ restart } />
+         );
       default:
          return '';
       }
