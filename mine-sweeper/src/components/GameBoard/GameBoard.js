@@ -25,10 +25,11 @@ const Board = styled.div`
 
 class GameBoard extends Component {
    state = {
-      rows: 16,
-      columns: 16,
-      bombs: 40,
+      rows: 10,
+      columns: 10,
+      bombs: 10,
       board: [],
+      cellsLeft: 0,
       gameState: 'not started',
    };
    createGameCells = () => {
@@ -52,7 +53,8 @@ class GameBoard extends Component {
    handleCellClick = ( type, row, column ) => {
       this.setState( ( prevState ) => {
          const board = [ ...prevState.board ];
-         const { rows, columns } = prevState;
+         const { rows, columns, bombs } = prevState;
+         let cellsLeft = prevState.cellsLeft;
          const cell = board[row][column];
          if ( type === 'left' && !cell.isFlagged ) {
             if ( cell.type === 'bomb' ) {
@@ -62,6 +64,7 @@ class GameBoard extends Component {
             }
             if ( cell.type === 'normal' ) {
                cell.isOpen = true;
+               cellsLeft -= 1;
                if ( cell.number === 0 ) {
                   const queue = [ [ row, column ] ];
                   //there should be O(1) implementation of queue in JS...
@@ -96,7 +99,10 @@ class GameBoard extends Component {
                                  board[row][column].isOpen === false
                               )
                                  queue.push( [ row, column ] );
-                              board[row][column].isOpen = true;
+                              if ( !board[row][column].isOpen ) {
+                                 cellsLeft -= 1;
+                                 board[row][column].isOpen = true;
+                              }
                            }
                         }
                      } );
@@ -109,7 +115,11 @@ class GameBoard extends Component {
          if ( type === 'right' ) {
             cell.isFlagged = !cell.isFlagged;
          }
-         return { board };
+         if ( cellsLeft === bombs ) {
+            this.wonGame();
+         }
+
+         return { board, cellsLeft };
       } );
    };
    generateBoard = () => {
@@ -163,6 +173,11 @@ class GameBoard extends Component {
       const { gameState } = this.state;
       return <GameStates gameState={ gameState } restart={ this.startGame } />;
    };
+   wonGame = () => {
+      this.setState( {
+         gameState: 'won',
+      } );
+   };
    lostGame = () => {
       this.setState( ( prevState ) => {
          const board = [ ...prevState.board ];
@@ -181,10 +196,12 @@ class GameBoard extends Component {
    };
    startGame = () => {
       const board = this.generateBoard();
-      this.setState( {
+
+      this.setState( ( prevState ) => ( {
          board,
          gameState: 'started',
-      } );
+         cellsLeft: prevState.columns * prevState.rows,
+      } ) );
    };
    render() {
       const { rows, columns, gameState } = this.state;
