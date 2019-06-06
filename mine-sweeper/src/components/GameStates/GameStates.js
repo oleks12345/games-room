@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import GameEnd from './GameEnd';
 
 const StyledWrapper = styled.div`
-   position: absolute;
+   position: fixed;
    display: ${( { gameState } ) => ( gameState === 'started' ? 'none' : 'flex' )};
    top: 0;
    bottom: 0;
