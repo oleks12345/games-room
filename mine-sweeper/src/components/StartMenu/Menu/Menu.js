@@ -16,7 +16,7 @@ const Menu = ( { start, toogleSettingsMenu } ) => {
 
 Menu.propTypes = {
    start: PropTypes.func.isRequired,
-   toogleSettingsMenu: PropTypes.bool.isRequired,
+   toogleSettingsMenu: PropTypes.func.isRequired,
 };
 
 export default Menu;
