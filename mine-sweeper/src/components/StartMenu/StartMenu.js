@@ -8,20 +8,27 @@ const StyledWrapper = styled.div`
    align-items: center;
    flex-direction: column;
    background-color: #ddd;
-   padding: 40px;
-   border-radius: 50px;
+   border-radius: 5em;
+   font-size: 5px;
+   padding: 4em;
+   @media (min-width: 640px) {
+      font-size: 8px;
+   }
+   @media (min-width: 768px) {
+      font-size: 10px;
+   }
 `;
 
 const StartButton = styled.button`
    position: relative;
    overflow: hidden;
-   font-size: 50px;
+   font-size: 5em;
    font-weight: bold;
-   padding: 10px 50px;
+   padding: 0.1em 0.5em;
    background-color: black;
    color: white;
-   border: 10px solid black;
-   border-radius: 25px;
+   border: 0.1em solid black;
+   border-radius: 0.5em;
    ::before,
    ::after {
       content: '';
@@ -43,10 +50,10 @@ const StartButton = styled.button`
       transform: translate(-50%, -50%);
    }
    ::after {
-      border-radius: 10px;
+      border-radius: 0.3em;
       background-color: black;
-      width: calc(100% - 20px);
-      height: calc(100% - 20px);
+      width: calc(100% - 0.3em);
+      height: calc(100% - 0.3em);
    }
 `;
 const SpanTop = styled.span`
@@ -54,13 +61,15 @@ const SpanTop = styled.span`
    z-index: 10;
 `;
 const StyledTitle = styled.h1`
-   font-size: 75px;
+   font-size: 7.5em;
    font-weight: bold;
+   margin-top: 0.25em;
+   margin-bottom: 0.25em;
 `;
 const SettingsButton = styled.button`
-   font-size: 25px;
-   margin-top: 10px;
-   padding: 10px 20px;
+   font-size: 2.5em;
+   margin-top: 0.75em;
+   padding: 0.5em 1em;
 `;
 const StartMenu = ( { start } ) => {
    return (
