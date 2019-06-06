@@ -6,7 +6,7 @@ const Settings = ( { toogleSettingsMenu, settings, changeSettings } ) => {
    const handleInputChange = ( e ) => {
       setInputs( {
          ...inputs,
-         [e.target.name]: parseInt( e.target.value ),
+         [e.target.name]: parseInt( e.target.value ? e.target.value : 0 ),
       } );
    };
    return (
