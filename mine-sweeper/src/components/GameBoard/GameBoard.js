@@ -188,7 +188,6 @@ class GameBoard extends Component {
    };
 
    restartGame = () => {
-      this.changeSettings( { rows: 20 } );
       this.setState( {
          gameState: 'not started',
       } );
@@ -241,7 +240,12 @@ class GameBoard extends Component {
                   {this.handleGameStates()}
                </Board>
             ) : (
-               <StartMenu start={ this.startGame }>Start</StartMenu>
+               <StartMenu
+                  start={ this.startGame }
+                  changeSettings={ this.changeSettings }
+               >
+                  Start
+               </StartMenu>
             )}
          </>
       );
