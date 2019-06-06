@@ -23,6 +23,7 @@ export const StyledWrapper = styled.div`
 
 const StartMenu = ( { start, changeSettings } ) => {
    const [ isSettingsOpen, setIsSettingsOpen ] = useState( false );
+
    return (
       <StyledWrapper>
          {isSettingsOpen ? (
