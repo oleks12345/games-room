@@ -39,6 +39,18 @@ class GameBoard extends Component {
       gameState: 'not started',
    };
 
+   changeSettings = ( newSettings ) => {
+      this.setState( ( prevState ) => {
+         return {
+            rows: newSettings.rows ? newSettings.rows : prevState.rows,
+            columns: newSettings.columns
+               ? newSettings.columns
+               : prevState.columns,
+            bombs: newSettings.bombs ? newSettings.bombs : prevState.bombs,
+         };
+      } );
+   };
+
    createGameCells = () => {
       const { rows, columns, board } = this.state;
       const cells = [];
