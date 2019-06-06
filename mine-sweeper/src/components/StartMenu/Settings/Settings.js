@@ -1,20 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Settings = ( { isSettingsOpen, setIsSettingsOpen } ) => {
+const Settings = ( { toogleSettingsMenu } ) => {
    return (
       <div>
-         <button
-            onClick={ () => setIsSettingsOpen( !isSettingsOpen ) }
-            type="button"
-         >
+         <button onClick={ toogleSettingsMenu } type="button">
             Go back
          </button>
       </div>
    );
 };
 Settings.propTypes = {
-   isSettingsOpen: PropTypes.bool.isRequired,
-   setIsSettingsOpen: PropTypes.func.isRequired,
+   toogleSettingsMenu: PropTypes.bool.isRequired,
 };
 export default Settings;

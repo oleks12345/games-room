@@ -23,19 +23,15 @@ export const StyledWrapper = styled.div`
 
 const StartMenu = ( { start, changeSettings } ) => {
    const [ isSettingsOpen, setIsSettingsOpen ] = useState( false );
-
+   const toogleSettingsMenu = () => setIsSettingsOpen( !isSettingsOpen );
    return (
       <StyledWrapper>
          {isSettingsOpen ? (
-            <Settings
-               isSettingsOpen={ isSettingsOpen }
-               setIsSettingsOpen={ setIsSettingsOpen }
-            />
+            <Settings toogleSettingsMenu={ toogleSettingsMenu } />
          ) : (
             <Menu
                start={ start }
-               isSettingsOpen={ isSettingsOpen }
-               setIsSettingsOpen={ setIsSettingsOpen }
+               toogleSettingsMenu={ toogleSettingsMenu }
                changeSettings={ changeSettings }
             />
          )}
