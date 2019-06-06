@@ -15,7 +15,7 @@ const createGridStyle = ( amount ) => {
 };
 
 const Board = styled.div`
-   margin: 25px auto;
+   margin: auto;
    padding: 1px;
    font-size: 5px;
    position: relative;

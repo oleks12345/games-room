@@ -12,6 +12,7 @@ export const StyledWrapper = styled.div`
    background-color: #ddd;
    border-radius: 5em;
    font-size: 5px;
+   margin: auto;
    padding: 4em;
    @media (min-width: 640px) {
       font-size: 8px;

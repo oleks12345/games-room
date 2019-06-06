@@ -8,8 +8,9 @@ const GameWrapper = styled.div`
    min-width: 100%;
    display: flex;
    padding: 25px;
-   justify-content: center;
+   /* justify-content: center; */
    align-items: center;
+   overflow: scroll;
 `;
 
 const MineSweeper = () => {
