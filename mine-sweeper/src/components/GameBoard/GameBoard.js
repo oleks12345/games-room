@@ -31,20 +31,25 @@ const Board = styled.div`
 
 class GameBoard extends Component {
    state = {
-      rows: 10,
-      columns: 10,
-      bombs: 10,
+      settings: {
+         rows: 10,
+         columns: 10,
+         bombs: 10,
+      },
       board: [],
       cellsLeft: 0,
       gameState: 'not started',
    };
 
    changeSettings = ( newSettings ) => {
-      this.setState( newSettings );
+      this.setState( { settings: newSettings } );
    };
 
    createGameCells = () => {
-      const { rows, columns, board } = this.state;
+      const {
+         settings: { rows, columns },
+         board,
+      } = this.state;
       const cells = [];
 
       for ( let i = 0; i < rows; i++ ) {
@@ -64,7 +69,9 @@ class GameBoard extends Component {
    handleCellClick = ( type, row, column ) => {
       this.setState( ( prevState ) => {
          const board = [ ...prevState.board ];
-         const { rows, columns, bombs } = prevState;
+         const {
+            settings: { rows, columns, bombs },
+         } = prevState;
          let cellsLeft = prevState.cellsLeft;
          const cell = board[row][column];
          if ( type === 'left' && !cell.isFlagged ) {
@@ -135,7 +142,9 @@ class GameBoard extends Component {
    };
 
    generateBoard = () => {
-      const { rows, columns, bombs } = this.state;
+      const {
+         settings: { rows, columns, bombs },
+      } = this.state;
 
       const board = [];
       for ( let i = 0; i < rows; i++ ) {
@@ -202,7 +211,9 @@ class GameBoard extends Component {
    lostGame = () => {
       this.setState( ( prevState ) => {
          const board = [ ...prevState.board ];
-         const { rows, columns } = prevState;
+         const {
+            settings: { rows, columns },
+         } = prevState;
          for ( let i = 0; i < rows; i++ ) {
             for ( let j = 0; j < columns; j++ ) {
                if ( board[i][j].type === 'bomb' ) board[i][j].isOpen = true;
@@ -222,12 +233,16 @@ class GameBoard extends Component {
       this.setState( ( prevState ) => ( {
          board,
          gameState: 'started',
-         cellsLeft: prevState.columns * prevState.rows,
+         cellsLeft: prevState.settings.columns * prevState.settings.rows,
       } ) );
    };
 
    render() {
-      const { rows, columns, gameState } = this.state;
+      const {
+         settings,
+         settings: { rows, columns },
+         gameState,
+      } = this.state;
       return (
          <>
             {gameState !== 'not started' ? (
@@ -243,6 +258,7 @@ class GameBoard extends Component {
                <StartMenu
                   start={ this.startGame }
                   changeSettings={ this.changeSettings }
+                  settings={ settings }
                >
                   Start
                </StartMenu>
