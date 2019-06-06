@@ -40,15 +40,7 @@ class GameBoard extends Component {
    };
 
    changeSettings = ( newSettings ) => {
-      this.setState( ( prevState ) => {
-         return {
-            rows: newSettings.rows ? newSettings.rows : prevState.rows,
-            columns: newSettings.columns
-               ? newSettings.columns
-               : prevState.columns,
-            bombs: newSettings.bombs ? newSettings.bombs : prevState.bombs,
-         };
-      } );
+      this.setState( newSettings );
    };
 
    createGameCells = () => {
@@ -196,6 +188,7 @@ class GameBoard extends Component {
    };
 
    restartGame = () => {
+      this.changeSettings( { rows: 20 } );
       this.setState( {
          gameState: 'not started',
       } );
