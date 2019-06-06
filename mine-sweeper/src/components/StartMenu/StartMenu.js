@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Menu from './Menu/Menu';
+import Settings from './Settings/Settings';
 
 export const StyledWrapper = styled.div`
    display: flex;
@@ -20,15 +21,29 @@ export const StyledWrapper = styled.div`
    }
 `;
 
-const StartMenu = ( { start } ) => {
+const StartMenu = ( { start, changeSettings } ) => {
+   const [ isSettingsOpen, setIsSettingsOpen ] = useState( false );
    return (
       <StyledWrapper>
-         <Menu start={ start } />
+         {isSettingsOpen ? (
+            <Settings
+               isSettingsOpen={ isSettingsOpen }
+               setIsSettingsOpen={ setIsSettingsOpen }
+            />
+         ) : (
+            <Menu
+               start={ start }
+               isSettingsOpen={ isSettingsOpen }
+               setIsSettingsOpen={ setIsSettingsOpen }
+               changeSettings={ changeSettings }
+            />
+         )}
       </StyledWrapper>
    );
 };
 StartMenu.propTypes = {
    start: PropTypes.func.isRequired,
+   changeSettings: PropTypes.func.isRequired,
 };
 
 export default StartMenu;
