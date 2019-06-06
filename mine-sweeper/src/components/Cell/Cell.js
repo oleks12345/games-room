@@ -6,8 +6,9 @@ import bombIcon from 'assets/images/mine.png';
 import flagIcon from 'assets/images/flag.svg';
 
 const StyledCell = styled.button`
+   font-size: 1em;
    position: relative;
-   border-width: 10px;
+   border-width: 1em;
    border-top-color: white;
    border-left-color: white;
    padding: 0;
@@ -41,7 +42,7 @@ const EmptyCell = styled.div`
    font-family: arial;
    font-weight: bold;
    background-color: #dddddd;
-   font-size: 50px;
+   font-size: 5em;
 `;
 const CellImg = styled.img`
    background-color: ${( { color } ) => ( color ? color : '#dddddd' )};

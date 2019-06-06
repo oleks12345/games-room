@@ -4,11 +4,10 @@ import Cell from 'components/Cell/Cell';
 import GameStates from 'components/GameStates/GameStates';
 import StartMenu from '../StartMenu/StartMenu';
 
-const GRID_SIZE = '50px';
 const createGridStyle = ( amount ) => {
    let gridStyle = '';
    for ( let i = 0; i < amount; i++ ) {
-      gridStyle += GRID_SIZE + ' ';
+      gridStyle += '5em ';
    }
    return css`
       ${gridStyle}
@@ -16,12 +15,18 @@ const createGridStyle = ( amount ) => {
 };
 
 const Board = styled.div`
+   margin: 25px auto;
+   padding: 1px;
+   font-size: 5px;
    position: relative;
    display: grid;
    grid-gap: 1px;
    background-color: #222;
    grid-template-columns: ${( { columns } ) => createGridStyle( columns )};
    grid-template-rows: ${( { rows } ) => createGridStyle( rows )};
+   @media (min-width: 768px) {
+      font-size: 10px;
+   }
 `;
 
 class GameBoard extends Component {
