@@ -27,7 +27,10 @@ const Settings = ( { toogleSettingsMenu, settings, changeSettings } ) => {
             </InputLabel>
          ) )}
          <StyledButton
-            onClick={ () => sendChanges( inputs, changeSettings ) }
+            onClick={ () => {
+               sendChanges( inputs, changeSettings );
+               toogleSettingsMenu();
+            } }
             type="button"
          >
             Confirm Settings
