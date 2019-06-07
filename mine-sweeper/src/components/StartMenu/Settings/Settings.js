@@ -1,31 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-const InputLabel = styled.label`
-   width: 100%;
-   display: flex;
-   justify-content: space-between;
-   font-size: 2em;
-`;
-const StyledInput = styled.input`
-   margin-left: 10px;
-`;
-
-const StyledButton = styled.button`
-   font-size: 2em;
-   margin-top: 0.5em;
-   padding: 0.5em 1em;
-`;
+import { InputLabel, StyledInput, StyledButton } from './Settings-styles';
 
 const Settings = ( { toogleSettingsMenu, settings, changeSettings } ) => {
    const [ inputs, setInputs ] = useState( settings );
+
    const handleInputChange = ( e ) => {
       setInputs( {
          ...inputs,
          [e.target.name]: parseInt( e.target.value ? e.target.value : 0 ),
       } );
    };
+
    const sendChanges = () => {
       if ( inputs.rows > 36 || inputs.columns > 36 ) {
          alert( 'board too big, it might have at most 36 columns and 36 rows' );
@@ -50,6 +37,7 @@ const Settings = ( { toogleSettingsMenu, settings, changeSettings } ) => {
 
       changeSettings( inputs );
    };
+
    return (
       <>
          {Object.keys( settings ).map( ( setting ) => (

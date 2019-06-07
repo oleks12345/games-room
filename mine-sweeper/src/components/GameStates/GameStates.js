@@ -1,18 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import GameEnd from './GameEnd';
 
-const StyledWrapper = styled.div`
-   position: fixed;
-   display: ${( { gameState } ) => ( gameState === 'started' ? 'none' : 'flex' )};
-   top: 0;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   justify-content: center;
-   align-items: center;
-`;
+import { StyledWrapper } from './GameStates-styles';
 
 const GameStates = ( { gameState, restart } ) => {
    const handleGameStates = ( gameStates, restart ) => {
