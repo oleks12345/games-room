@@ -4,6 +4,10 @@ export const StyledWrapper = styled.div`
    background: rgba(100, 100, 100, 0.9);
    text-align: center;
    padding: 2em;
+   font-size: 5px;
+   @media (min-width: 768px) {
+      font-size: 8px;
+   }
 `;
 export const StyledTitle = styled.h2`
    color: ${( { titleColor } ) => titleColor};
