@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const StyledCell = styled.button`
-   font-size: 1em;
+   font-size: 0.2em;
    position: relative;
    border-width: 1em;
    border-top-color: white;
@@ -18,10 +18,10 @@ export const StyledCell = styled.button`
          ::after {
             content: '';
             position: absolute;
-            left: -10px;
-            right: -10px;
-            top: -10px;
-            bottom: -10px;
+            left: -1em;
+            right: -1em;
+            top: -1em;
+            bottom: -1em;
             background-color: ${color};
             opacity: 0.5;
          }
@@ -37,10 +37,11 @@ export const EmptyCell = styled.div`
    font-family: arial;
    font-weight: bold;
    background-color: #dddddd;
-   font-size: 5em;
+   font-size: 1em;
 `;
 export const CellImg = styled.img`
    background-color: ${( { color } ) => ( color ? color : '#dddddd' )};
    width: 100%;
    height: 100%;
+   padding: 2px;
 `;

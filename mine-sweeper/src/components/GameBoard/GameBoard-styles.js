@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const createGridStyle = ( amount ) => {
    let gridStyle = '';
    for ( let i = 0; i < amount; i++ ) {
-      gridStyle += '5em ';
+      gridStyle += '1em ';
    }
    return css`
       ${gridStyle}
@@ -13,7 +13,7 @@ const createGridStyle = ( amount ) => {
 export const Board = styled.div`
    margin: auto;
    padding: 1px;
-   font-size: 5px;
+   font-size: 25px;
    position: relative;
    display: grid;
    grid-gap: 1px;
@@ -21,6 +21,6 @@ export const Board = styled.div`
    grid-template-columns: ${( { columns } ) => createGridStyle( columns )};
    grid-template-rows: ${( { rows } ) => createGridStyle( rows )};
    @media (min-width: 768px) {
-      font-size: 7px;
+      font-size: 35px;
    }
 `;
