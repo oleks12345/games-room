@@ -21,6 +21,6 @@ export const Board = styled.div`
    grid-template-columns: ${( { columns } ) => createGridStyle( columns )};
    grid-template-rows: ${( { rows } ) => createGridStyle( rows )};
    @media (min-width: 768px) {
-      font-size: 10px;
+      font-size: 7px;
    }
 `;
